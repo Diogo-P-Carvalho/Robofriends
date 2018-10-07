@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = (props) => {
-    const {robots} = props;
+const CardList = ({robots}) => {
+    
     const cardComponent = robots.map((robot, i) => {
         return (
             <Card 
@@ -16,7 +16,7 @@ const CardList = (props) => {
 
     return(
         <div>
-            {cardComponent};
+            {cardComponent}
         </div>
     );
 }
