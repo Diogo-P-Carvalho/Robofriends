@@ -12,3 +12,11 @@ h1{
     font-weight: 200;
     color: #0ccac4;
 }
+
+.loading{
+    align-items: center;
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    font-style: italic; 
+}
