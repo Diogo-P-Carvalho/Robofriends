@@ -2,8 +2,8 @@ import React from 'react';
 import Card from './Card';
 
 const CardList = ({robots}) => {
-    
-    const cardComponent = robots.map((robot, i) => {
+    //console.log('CardList')
+    const cardComponent = robots.map((robot, i) => {       
         return (
             <Card 
             key={robots[i].id} 
