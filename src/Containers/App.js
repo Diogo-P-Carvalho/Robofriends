@@ -7,6 +7,7 @@ import ErrorBoundry from '../Components/ErrorBoundry';
 //import { robots } from './robots';
 import './App.css';
 import { setSearchField, requestRobots } from '../actions';
+import Header from '../Components/Header';
 
 const mapStateToProps = state => {
     return{
@@ -54,17 +55,29 @@ class App extends Component {
             return robot.name.toLowerCase().includes(searchField.toLowerCase())
         });
         //console.log('render');
-        return isPending ? 
-            <h1 className="loading">Loading...</h1> :
-            <div className="tc">
-                <h1 className="f1">RoboFriends</h1>
+        // return isPending ? 
+        //     <h1 className="loading">Loading...</h1> :
+        //     <div className="tc">
+        //         <Header />
+        //         <SearchBox searchChange={onSearchChange}/>
+        //         <Scroll>
+        //             <ErrorBoundry>
+        //                 <CardList robots={filteredRobots}/>
+        //             </ErrorBoundry>                    
+        //         </Scroll>                  
+        //     </div>
+        return (
+            <div className='tc'>
+                <Header />
                 <SearchBox searchChange={onSearchChange}/>
                 <Scroll>
+                    { isPending ? <h1 className='loading'>Loading</h1> : 
                     <ErrorBoundry>
-                        <CardList robots={filteredRobots}/>
-                    </ErrorBoundry>                    
-                </Scroll>                  
-            </div>          
+                        <CardList robots={filteredRobots} /> 
+                    </ErrorBoundry> }  
+                </Scroll>
+            </div>    
+        );              
     }
 }
 
