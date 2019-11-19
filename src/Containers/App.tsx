@@ -10,7 +10,31 @@ import { setSearchField, requestRobots } from '../actions';
 //import Header from '../Components/Header/Header';
 import MainPage from '../Components/MainPage/MainPage';
 
-const mapStateToProps = state => {
+export interface IRobot {
+    name: string;
+    id: number;
+    email: string;
+}
+
+interface IAppProps {
+
+}
+
+interface IAppState {
+    robots: Array<IRobot>;
+    searchField: string;
+}
+
+// const mapStateToProps = (state) => {
+//     return{
+//         searchField: state.searchRobots.searchField,
+//         robots: state.requestRobots.robots,
+//         isPending: state.requestRobots.isPending,
+//         error: state.requestRobots.error
+//     }
+// }
+
+const mapStateToProps = (state: { searchRobots: { searchField: any; }; requestRobots: { robots: any; isPending: any; error: any; }; }) => {
     return{
         searchField: state.searchRobots.searchField,
         robots: state.requestRobots.robots,
@@ -19,14 +43,20 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+//         onRequestRobots: () => dispatch(requestRobots())
+//     }
+// }
+const mapDispatchToProps = (dispatch: { (arg0: { type: string; payload: any; }): void; (arg0: (dispatch: any) => Promise<any>): void; }) => {
     return {
-        onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+        onSearchChange: (event: React.SyntheticEvent<HTMLInputElement>): void => dispatch(setSearchField(event.currentTarget.value)),
         onRequestRobots: () => dispatch(requestRobots())
     }
 }
 
-class App extends Component {
+class App extends Component<IAppProps, IAppState> {
     /*constructor(){
         super();
         this.state = {
@@ -49,7 +79,7 @@ class App extends Component {
         this.setState({ searchfield: event.target.value });
     }*/
 
-    render(){
+    //render(){
         //const {robots, /*searchfield*/} = this.state;
         // const{ searchField, onSearchChange, robots, isPending } = this.props;
         // const filteredRobots = robots.filter(robot => {
@@ -79,8 +109,9 @@ class App extends Component {
         //         </Scroll>
         //     </div>    
         // );    
-        return <MainPage { ...this.props }/>          
-    }
+        //return <MainPage { ...this.props }/>          
+    //}
+    render(): JSX.Element { return (<MainPage {...this.props} />) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
